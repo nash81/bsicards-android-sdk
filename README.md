@@ -175,7 +175,7 @@ client.getLoyaltyPoints(userEmail, cardId)
 client.redeemPoints(userEmail, cardId)
 ```
 
-### Utility Operations
+### Administrator Operations
 
 ```kotlin
 // Get wallet balance
@@ -186,6 +186,15 @@ client.getDeposits(userEmail)
 
 // Get all transactions
 client.getAllTransactions(userEmail)
+
+// Get all MasterCards (admin view)
+client.getAllMastercardsByAdmin(userEmail)
+
+// Get all Visa Cards (admin view)
+client.getAllVisaCardsByAdmin(userEmail)
+
+// Get all Digital Cards (admin view)
+client.getAllDigitalCardsByAdmin(userEmail)
 ```
 
 ## Error Handling

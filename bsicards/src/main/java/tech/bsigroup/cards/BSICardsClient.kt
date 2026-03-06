@@ -343,7 +343,7 @@ class BSICardsClient(
             api.unfreezeVirtualCard(publicKey, secretKey, cardId)
         }
 
-    // ============ Utility Operations ============
+    // ============ Administrator Operations ============
 
     /**
      * Get wallet balance
@@ -372,7 +372,34 @@ class BSICardsClient(
             api.getAllTransactions(publicKey, secretKey, userEmail)
         }
 
-    // ============ Digital Wallet Operations ============
+    /**
+     * Get all MasterCards (admin view)
+     */
+    suspend fun getAllMastercardsByAdmin(userEmail: String): ApiResponse<List<CardDetails>> =
+        withContext(Dispatchers.IO) {
+            validateInput(userEmail)
+            api.getAllMastercardsByAdmin(publicKey, secretKey, AdminCardRequest(userEmail))
+        }
+
+    /**
+     * Get all Visa Cards (admin view)
+     */
+    suspend fun getAllVisaCardsByAdmin(userEmail: String): ApiResponse<List<CardDetails>> =
+        withContext(Dispatchers.IO) {
+            validateInput(userEmail)
+            api.getAllVisaCardsByAdmin(publicKey, secretKey, AdminCardRequest(userEmail))
+        }
+
+    /**
+     * Get all Digital Cards (admin view)
+     */
+    suspend fun getAllDigitalCardsByAdmin(userEmail: String): ApiResponse<List<CardDetails>> =
+        withContext(Dispatchers.IO) {
+            validateInput(userEmail)
+            api.getAllDigitalCardsByAdmin(publicKey, secretKey, AdminCardRequest(userEmail))
+        }
+
+    // ============ Validation Methods ============
 
     /**
      * Check 3DS for digital card

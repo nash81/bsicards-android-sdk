@@ -9,7 +9,7 @@ The BSICARDS Android SDK provides a complete Kotlin interface for the BSICARDS C
 - [MasterCard Operations](#mastercard-operations)
 - [Visa Card Operations](#visa-card-operations)
 - [Digital Wallet Operations](#digital-wallet-operations)
-- [Utility Operations](#utility-operations)
+- [Administrator Operations](#administrator-operations)
 - [Data Models](#data-models)
 - [Exceptions](#exceptions)
 
@@ -372,7 +372,7 @@ suspend fun unfreezeVirtualCard(
 
 ---
 
-## Utility Operations
+## Administrator Operations
 
 ### getWalletBalance
 
@@ -406,6 +406,54 @@ suspend fun getAllTransactions(
     userEmail: String
 ): ApiResponse<TransactionResponse>
 ```
+
+### getAllMastercardsByAdmin
+
+Retrieves all MasterCards (admin view) for a user.
+
+**Signature:**
+```kotlin
+suspend fun getAllMastercardsByAdmin(
+    userEmail: String
+): ApiResponse<List<CardDetails>>
+```
+
+**Parameters:**
+- `userEmail` (String): User's email address
+
+**Returns:** `ApiResponse<List<CardDetails>>` with all user's MasterCards in admin view
+
+### getAllVisaCardsByAdmin
+
+Retrieves all Visa Cards (admin view) for a user.
+
+**Signature:**
+```kotlin
+suspend fun getAllVisaCardsByAdmin(
+    userEmail: String
+): ApiResponse<List<CardDetails>>
+```
+
+**Parameters:**
+- `userEmail` (String): User's email address
+
+**Returns:** `ApiResponse<List<CardDetails>>` with all user's Visa Cards in admin view
+
+### getAllDigitalCardsByAdmin
+
+Retrieves all Digital Cards (admin view) for a user.
+
+**Signature:**
+```kotlin
+suspend fun getAllDigitalCardsByAdmin(
+    userEmail: String
+): ApiResponse<List<CardDetails>>
+```
+
+**Parameters:**
+- `userEmail` (String): User's email address
+
+**Returns:** `ApiResponse<List<CardDetails>>` with all user's Digital Cards in admin view
 
 ---
 

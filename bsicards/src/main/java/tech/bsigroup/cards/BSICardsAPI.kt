@@ -249,7 +249,7 @@ interface BSICardsAPI {
         @Path("cardId") cardId: String
     ): ApiResponse<MessageResponse>
 
-    // ============ Utility Operations ============
+    // ============ Administrator Operations ============
 
     /**
      * Get wallet balance
@@ -280,6 +280,36 @@ interface BSICardsAPI {
         @Header("secretkey") secretKey: String,
         @Query("useremail") userEmail: String
     ): ApiResponse<TransactionResponse>
+
+    /**
+     * Get all MasterCards
+     */
+    @POST("getallcard")
+    suspend fun getAllMastercardsByAdmin(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: AdminCardRequest
+    ): ApiResponse<List<CardDetails>>
+
+    /**
+     * Get all Visa Cards
+     */
+    @POST("visagetallcard")
+    suspend fun getAllVisaCardsByAdmin(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: AdminCardRequest
+    ): ApiResponse<List<CardDetails>>
+
+    /**
+     * Get all Digital Cards
+     */
+    @POST("getalldigital")
+    suspend fun getAllDigitalCardsByAdmin(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: AdminCardRequest
+    ): ApiResponse<List<CardDetails>>
 
     // ============ Digital Wallet Operations ============
 

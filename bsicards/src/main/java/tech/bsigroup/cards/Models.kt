@@ -163,6 +163,14 @@ data class DigitalCardRequest(
 )
 
 /**
+ * Admin card listing request
+ */
+data class AdminCardRequest(
+    @SerializedName("useremail")
+    val userEmail: String
+)
+
+/**
  * Loyalty points response
  */
 data class LoyaltyPointsResponse(

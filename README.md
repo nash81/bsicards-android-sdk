@@ -5,6 +5,7 @@ A comprehensive Android SDK for integrating with the BSICARDS Card Issuance API.
 [![Android](https://img.shields.io/badge/Android-5.0+-brightgreen)](https://www.android.com/)
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.8+-purple)](https://kotlinlang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![JitPack](https://jitpack.io/v/nash81/bsicards-android-sdk.svg)](https://jitpack.io/#nash81/bsicards-android-sdk)
 
 ## Features
 
@@ -27,21 +28,71 @@ A comprehensive Android SDK for integrating with the BSICARDS Card Issuance API.
 
 ## Installation
 
-### Via Gradle
+### Option 1: Install from JitPack (Recommended)
 
-Add to your project's `build.gradle`:
+1. Add JitPack repository.
+
+`settings.gradle`:
 
 ```gradle
-dependencies {
-    implementation 'tech.bsigroup:bsicards-android-sdk:1.0.0'
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
-### Manual Setup
+2. Add SDK dependency in your app module `build.gradle`.
 
-1. Clone the repository
-2. Add the `bsicards` module to your Android project
-3. Sync Gradle files
+```gradle
+dependencies {
+    implementation 'com.github.nash81:bsicards-android-sdk:1.0.0'
+}
+```
+
+Use a GitHub tag (for example `1.0.0`) as the version.
+
+### Option 2: Install from GitHub Source
+
+1. Clone repository.
+
+```bash
+git clone https://github.com/nash81/bsicards-android-sdk.git
+```
+
+2. Add module in your project's `settings.gradle`.
+
+```gradle
+include ':bsicards'
+project(':bsicards').projectDir = new File(rootDir, 'bsicards-android-sdk/bsicards')
+```
+
+3. Add module dependency in your app module `build.gradle`.
+
+```gradle
+dependencies {
+    implementation project(':bsicards')
+}
+```
+
+### GitHub + JitPack Release Flow (Maintainers)
+
+1. Commit and push to `main`.
+2. Create and push a version tag.
+
+```bash
+git tag 1.0.1
+git push origin 1.0.1
+```
+
+3. Developers can then install:
+
+```gradle
+implementation 'com.github.nash81:bsicards-android-sdk:1.0.1'
+```
 
 ## Configuration
 

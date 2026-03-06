@@ -9,19 +9,32 @@
 
 ## Installation Methods
 
-### Method 1: Using Gradle (Recommended)
+### Method 1: JitPack (Recommended)
 
-Add to your app's `build.gradle`:
+1. Add JitPack repository in your project `settings.gradle`:
 
 ```gradle
-dependencies {
-    implementation 'tech.bsigroup:bsicards-android-sdk:1.0.0'
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
-Sync Gradle and you're ready to use!
+2. Add dependency in your app module `build.gradle`:
 
-### Method 2: Clone and Local Module
+```gradle
+dependencies {
+    implementation 'com.github.nash81:bsicards-android-sdk:1.0.0'
+}
+```
+
+Use the GitHub release tag as the version (example: `1.0.0`).
+
+### Method 2: GitHub Source (Local Module)
 
 1. Clone the repository:
 ```bash

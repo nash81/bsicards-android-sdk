@@ -75,7 +75,8 @@ publishing {
                 from components.release
             }
 
-            groupId = 'tech.bsigroup'
+            // JitPack resolves artifacts from GitHub tags/commits; keep coordinates aligned.
+            groupId = 'com.github.nash81'
             artifactId = 'bsicards-android-sdk'
             version = '1.0.0'
 
@@ -108,4 +109,3 @@ publishing {
         }
     }
 }
-

@@ -110,23 +110,6 @@ suspend fun getMastercardTransactions(
 
 **Returns:** `ApiResponse<TransactionResponse>` with transactions list
 
-### changeMastercardPin
-
-Changes the PIN for a MasterCard.
-
-**Signature:**
-```kotlin
-suspend fun changeMastercardPin(
-    cardId: String,
-    newPin: String
-): ApiResponse<MessageResponse>
-```
-
-**Parameters:**
-- `cardId` (String): Unique card identifier
-- `newPin` (String): New 4-digit PIN
-
-**Returns:** `ApiResponse<MessageResponse>` with confirmation
 
 ### freezeMastercard
 

@@ -147,14 +147,6 @@ class BSICardsClient(
             api.getMastercardTransactions(publicKey, secretKey, cardId)
         }
 
-    /**
-     * Change MasterCard PIN
-     */
-    suspend fun changeMastercardPin(cardId: String, newPin: String): ApiResponse<MessageResponse> =
-        withContext(Dispatchers.IO) {
-            validateInput(cardId, newPin)
-            api.changeMastercardPin(publicKey, secretKey, cardId, ChangePinRequest(newPin))
-        }
 
     /**
      * Freeze MasterCard
@@ -322,14 +314,6 @@ class BSICardsClient(
             api.getVirtualCardTransactions(publicKey, secretKey, cardId)
         }
 
-    /**
-     * Get USDT address
-     */
-    suspend fun getUSDTAddress(userEmail: String): ApiResponse<USDTAddressResponse> =
-        withContext(Dispatchers.IO) {
-            validateInput(userEmail)
-            api.getUSDTAddress(publicKey, secretKey, userEmail)
-        }
 
     /**
      * Fund virtual card
@@ -386,6 +370,62 @@ class BSICardsClient(
         withContext(Dispatchers.IO) {
             validateInput(userEmail)
             api.getAllTransactions(publicKey, secretKey, userEmail)
+        }
+
+    // ============ Digital Wallet Operations ============
+
+    /**
+     * Check 3DS for digital card
+     */
+    suspend fun check3DS(userEmail: String, cardId: String): ApiResponse<MessageResponse> =
+        withContext(Dispatchers.IO) {
+            validateInput(userEmail, cardId)
+            api.check3DS(publicKey, secretKey, Check3DSRequest(userEmail, cardId))
+        }
+
+    /**
+     * Approve 3DS for digital card
+     */
+    suspend fun approve3DS(userEmail: String, cardId: String, eventId: String): ApiResponse<MessageResponse> =
+        withContext(Dispatchers.IO) {
+            validateInput(userEmail, cardId, eventId)
+            api.approve3DS(publicKey, secretKey, Approve3DSRequest(userEmail, cardId, eventId))
+        }
+
+    /**
+     * Create addon card
+     */
+    suspend fun createAddonCard(userEmail: String, cardId: String): ApiResponse<CardResponse> =
+        withContext(Dispatchers.IO) {
+            validateInput(userEmail, cardId)
+            api.createAddonCard(publicKey, secretKey, DigitalCardRequest(userEmail, cardId))
+        }
+
+    /**
+     * Terminate digital card
+     */
+    suspend fun terminateDigitalCard(userEmail: String, cardId: String): ApiResponse<MessageResponse> =
+        withContext(Dispatchers.IO) {
+            validateInput(userEmail, cardId)
+            api.terminateDigitalCard(publicKey, secretKey, DigitalCardRequest(userEmail, cardId))
+        }
+
+    /**
+     * Get loyalty points for digital card
+     */
+    suspend fun getLoyaltyPoints(userEmail: String, cardId: String): ApiResponse<LoyaltyPointsResponse> =
+        withContext(Dispatchers.IO) {
+            validateInput(userEmail, cardId)
+            api.getLoyaltyPoints(publicKey, secretKey, DigitalCardRequest(userEmail, cardId))
+        }
+
+    /**
+     * Redeem loyalty points
+     */
+    suspend fun redeemPoints(userEmail: String, cardId: String): ApiResponse<MessageResponse> =
+        withContext(Dispatchers.IO) {
+            validateInput(userEmail, cardId)
+            api.redeemPoints(publicKey, secretKey, DigitalCardRequest(userEmail, cardId))
         }
 
     // ============ Validation Methods ============

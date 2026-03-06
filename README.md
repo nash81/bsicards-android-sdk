@@ -66,61 +66,6 @@ val client = BSICardsClient(
 )
 ```
 
-## Quick Start
-
-### Create a MasterCard
-
-```kotlin
-lifecycleScope.launch {
-    try {
-        val response = client.createMastercard(
-            userEmail = "user@example.com",
-            nameOnCard = "John Doe",
-            pin = "1234"
-        )
-
-        if (response.code == 200) {
-            Toast.makeText(this@MainActivity, response.message, Toast.LENGTH_SHORT).show()
-        }
-    } catch (e: Exception) {
-        Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-    }
-}
-```
-
-### Get All Visa Cards
-
-```kotlin
-lifecycleScope.launch {
-    try {
-        val response = client.getAllVisaCards("user@example.com")
-        val cards = response.data
-
-        cards?.forEach { card ->
-            Log.d("BSICARDS", "Card: ${card.cardNumber}")
-        }
-    } catch (e: Exception) {
-        Log.e("BSICARDS", "Error: ${e.message}")
-    }
-}
-```
-
-### Fund a Card
-
-```kotlin
-lifecycleScope.launch {
-    try {
-        val response = client.fundMastercard(
-            cardId = "card-123",
-            amount = "50.00"
-        )
-
-        Log.d("BSICARDS", response.message)
-    } catch (e: Exception) {
-        Log.e("BSICARDS", "Error: ${e.message}")
-    }
-}
-```
 
 ## API Methods
 
@@ -142,9 +87,6 @@ client.getMastercardDetails(cardId)
 // Get transactions
 client.getMastercardTransactions(cardId)
 
-// Change PIN
-client.changeMastercardPin(cardId, newPin)
-
 // Freeze card
 client.freezeMastercard(cardId)
 
@@ -164,21 +106,26 @@ client.createVisaCard(userEmail, name, nationalId, idUrl, photoUrl, dob)
 // Get all Visa cards
 client.getAllVisaCards(userEmail)
 
+// Get pending Visa cards
+client.getPendingVisaCards(userEmail)
+
 // Get card details
 client.getVisaCardDetails(cardId)
 
 // Get transactions
 client.getVisaCardTransactions(cardId)
 
-// Freeze/Unfreeze
+// Freeze card
 client.freezeVisaCard(cardId)
+
+// Unfreeze card
 client.unfreezeVisaCard(cardId)
 
 // Fund card
 client.fundVisaCard(cardId, amount)
 ```
 
-### Digital Wallet Operations
+### Digital Wallet / Virtual Card Operations
 
 ```kotlin
 // Create virtual card
@@ -191,18 +138,41 @@ client.createVirtualCard(
 // Get all virtual cards
 client.getAllVirtualCards(userEmail)
 
+// Get pending virtual cards
+client.getPendingVirtualCards(userEmail)
+
 // Get card details
 client.getVirtualCardDetails(cardId)
 
-// Get USDT address
-client.getUSDTAddress(userEmail)
+// Get transactions
+client.getVirtualCardTransactions(cardId)
+
+// Freeze card
+client.freezeVirtualCard(cardId)
+
+// Unfreeze card
+client.unfreezeVirtualCard(cardId)
 
 // Fund card
 client.fundVirtualCard(cardId, amount)
 
-// Freeze/Unfreeze
-client.freezeVirtualCard(cardId)
-client.unfreezeVirtualCard(cardId)
+// Check 3DS
+client.check3DS(userEmail, cardId)
+
+// Approve 3DS
+client.approve3DS(userEmail, cardId, eventId)
+
+// Create addon card
+client.createAddonCard(userEmail, cardId)
+
+// Terminate card
+client.terminateDigitalCard(userEmail, cardId)
+
+// Get loyalty points
+client.getLoyaltyPoints(userEmail, cardId)
+
+// Redeem points
+client.redeemPoints(userEmail, cardId)
 ```
 
 ### Utility Operations

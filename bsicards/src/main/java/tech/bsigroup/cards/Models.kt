@@ -131,6 +131,58 @@ data class MessageResponse(
 )
 
 /**
+ * Check 3DS request
+ */
+data class Check3DSRequest(
+    @SerializedName("useremail")
+    val userEmail: String,
+    @SerializedName("cardid")
+    val cardId: String
+)
+
+/**
+ * Approve 3DS request
+ */
+data class Approve3DSRequest(
+    @SerializedName("useremail")
+    val userEmail: String,
+    @SerializedName("cardid")
+    val cardId: String,
+    @SerializedName("eventId")
+    val eventId: String
+)
+
+/**
+ * Digital card operations request
+ */
+data class DigitalCardRequest(
+    @SerializedName("useremail")
+    val userEmail: String,
+    @SerializedName("cardid")
+    val cardId: String
+)
+
+/**
+ * Loyalty points response
+ */
+data class LoyaltyPointsResponse(
+    val points: List<LoyaltyPoint>?,
+    val balance: String? = null,
+    val code: String? = null
+)
+
+data class LoyaltyPoint(
+    val id: Int? = null,
+    val cardid: String? = null,
+    val balance: String? = null,
+    val type: String? = null,
+    val details: String? = null,
+    val points: String? = null,
+    val created_at: String? = null,
+    val updated_at: String? = null
+)
+
+/**
  * Wallet balance response
  */
 data class BalanceResponse(

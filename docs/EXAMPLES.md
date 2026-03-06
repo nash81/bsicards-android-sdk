@@ -120,21 +120,7 @@ lifecycleScope.launch {
 }
 ```
 
-### Change Card PIN
 
-```kotlin
-lifecycleScope.launch {
-    try {
-        val response = bsiCards.changeMastercardPin(
-            cardId = "card-12345",
-            newPin = "5678"
-        )
-        Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
-    } catch (e: Exception) {
-        Log.e("BSICARDS", "Error: ${e.message}")
-    }
-}
-```
 
 ### Freeze and Unfreeze Card
 

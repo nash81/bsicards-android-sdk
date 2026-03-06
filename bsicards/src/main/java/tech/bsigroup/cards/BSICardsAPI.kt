@@ -60,16 +60,6 @@ interface BSICardsAPI {
         @Path("cardId") cardId: String
     ): ApiResponse<TransactionResponse>
 
-    /**
-     * Change MasterCard PIN
-     */
-    @POST("admin/mastercard/{cardId}/change-pin")
-    suspend fun changeMastercardPin(
-        @Header("publickey") publicKey: String,
-        @Header("secretkey") secretKey: String,
-        @Path("cardId") cardId: String,
-        @Body request: ChangePinRequest
-    ): ApiResponse<MessageResponse>
 
     /**
      * Freeze MasterCard
@@ -227,15 +217,6 @@ interface BSICardsAPI {
         @Path("cardId") cardId: String
     ): ApiResponse<TransactionResponse>
 
-    /**
-     * Get USDT address
-     */
-    @GET("admin/usdt-address")
-    suspend fun getUSDTAddress(
-        @Header("publickey") publicKey: String,
-        @Header("secretkey") secretKey: String,
-        @Query("useremail") userEmail: String
-    ): ApiResponse<USDTAddressResponse>
 
     /**
      * Fund virtual card
@@ -299,5 +280,67 @@ interface BSICardsAPI {
         @Header("secretkey") secretKey: String,
         @Query("useremail") userEmail: String
     ): ApiResponse<TransactionResponse>
+
+    // ============ Digital Wallet Operations ============
+
+    /**
+     * Check 3DS for digital card
+     */
+    @POST("check3ds")
+    suspend fun check3DS(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: Check3DSRequest
+    ): ApiResponse<MessageResponse>
+
+    /**
+     * Approve 3DS for digital card
+     */
+    @POST("approve3ds")
+    suspend fun approve3DS(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: Approve3DSRequest
+    ): ApiResponse<MessageResponse>
+
+    /**
+     * Create addon card
+     */
+    @POST("createaddon")
+    suspend fun createAddonCard(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalCardRequest
+    ): ApiResponse<CardResponse>
+
+    /**
+     * Terminate digital card
+     */
+    @POST("terminatedigital")
+    suspend fun terminateDigitalCard(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalCardRequest
+    ): ApiResponse<MessageResponse>
+
+    /**
+     * Get loyalty points for digital card
+     */
+    @POST("digitalcardpoints")
+    suspend fun getLoyaltyPoints(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalCardRequest
+    ): ApiResponse<LoyaltyPointsResponse>
+
+    /**
+     * Redeem loyalty points
+     */
+    @POST("redeempoints")
+    suspend fun redeemPoints(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalCardRequest
+    ): ApiResponse<MessageResponse>
 }
 

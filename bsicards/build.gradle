@@ -1,0 +1,111 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'tech.bsigroup.cards'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 34
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    // OkHttp for HTTP requests
+    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+
+    // Retrofit for REST API
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    // Gson for JSON serialization
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // Moshi for JSON parsing (alternative)
+    implementation 'com.squareup.moshi:moshi:1.15.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.15.0'
+
+    // Kotlin Coroutines for async operations
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
+
+    // AndroidX
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.5.1'
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:5.1.0'
+    testImplementation 'androidx.arch.core:core-testing:2.2.0'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+// Publishing configuration
+publishing {
+    publications {
+        release(MavenPublication) {
+            afterEvaluate {
+                from components.release
+            }
+
+            groupId = 'tech.bsigroup'
+            artifactId = 'bsicards-android-sdk'
+            version = '1.0.0'
+
+            pom {
+                name = 'BSICARDS Android SDK'
+                description = 'Android SDK for BSICARDS Card Issuance API'
+                url = 'https://github.com/nash81/bsicards-android-sdk'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'nash81'
+                        name = 'BSI Group'
+                        email = 'cs@bsigroup.tech'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:https://github.com/nash81/bsicards-android-sdk.git'
+                    developerConnection = 'scm:git:https://github.com/nash81/bsicards-android-sdk.git'
+                    url = 'https://github.com/nash81/bsicards-android-sdk'
+                }
+            }
+        }
+    }
+}
+

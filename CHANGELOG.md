@@ -2,6 +2,24 @@
 
 All notable changes to the BSICARDS Android SDK will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- Added Digital Visa Wallet Card endpoint support:
+  - `createDigitalVisaWalletCard`
+  - `getAllDigitalVisaWalletCards`
+  - `getDigitalVisaWalletCard`
+  - `fundDigitalVisaWalletCard`
+  - `getDigitalVisaWalletOtp`
+  - `blockDigitalVisaWalletCard`
+  - `unblockDigitalVisaWalletCard`
+- Added Digital Visa Wallet request/response models in `Models.kt`
+
+### Changed
+- Updated validation to support endpoint-specific minimum funding amounts (Digital Visa Wallet minimum `$5.00`)
+- Updated `README.md`, `docs/API.md`, and `docs/EXAMPLES.md` with Digital Visa Wallet methods and examples
+- Removed obsolete `getUSDTAddress` references from docs
+
 ## [1.0.0] - 2026-03-06
 
 ### Added

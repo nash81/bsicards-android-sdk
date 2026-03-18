@@ -249,6 +249,78 @@ interface BSICardsAPI {
         @Path("cardId") cardId: String
     ): ApiResponse<MessageResponse>
 
+    // ============ Digital Visa Wallet Card Operations ============
+
+    /**
+     * Create Digital Visa Wallet card
+     */
+    @POST("digital-wallet-visa/create-card")
+    suspend fun createDigitalVisaWalletCard(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalVisaWalletCreateCardRequest
+    ): ApiResponse<DigitalVisaWalletCardResponse>
+
+    /**
+     * Get all Digital Visa Wallet cards
+     */
+    @POST("digital-wallet-visa/get-all-cards")
+    suspend fun getAllDigitalVisaWalletCards(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalVisaWalletUserRequest
+    ): ApiResponse<List<DigitalVisaWalletCardSummary>>
+
+    /**
+     * Get Digital Visa Wallet card
+     */
+    @POST("digital-wallet-visa/get-card")
+    suspend fun getDigitalVisaWalletCard(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalVisaWalletCardRequest
+    ): ApiResponse<DigitalVisaWalletCardDetails>
+
+    /**
+     * Fund Digital Visa Wallet card
+     */
+    @POST("digital-wallet-visa/fund-card")
+    suspend fun fundDigitalVisaWalletCard(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalVisaWalletFundRequest
+    ): ApiResponse<MessageResponse>
+
+    /**
+     * Get Digital Visa Wallet OTP
+     */
+    @POST("digital-wallet-visa/get-otp")
+    suspend fun getDigitalVisaWalletOtp(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalVisaWalletCardRequest
+    ): ApiResponse<DigitalVisaWalletOtpResponse>
+
+    /**
+     * Block Digital Visa Wallet card
+     */
+    @POST("digital-wallet-visa/block-card")
+    suspend fun blockDigitalVisaWalletCard(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalVisaWalletCardRequest
+    ): ApiResponse<MessageResponse>
+
+    /**
+     * Unblock Digital Visa Wallet card
+     */
+    @POST("digital-wallet-visa/unblock-card")
+    suspend fun unblockDigitalVisaWalletCard(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: DigitalVisaWalletCardRequest
+    ): ApiResponse<MessageResponse>
+
     // ============ Administrator Operations ============
 
     /**

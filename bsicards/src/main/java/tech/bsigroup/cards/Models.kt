@@ -57,6 +57,47 @@ data class VirtualCardRequest(
 )
 
 /**
+ * Digital Visa Wallet create card request
+ */
+data class DigitalVisaWalletCreateCardRequest(
+    @SerializedName("useremail")
+    val userEmail: String,
+    @SerializedName("firstname")
+    val firstName: String,
+    @SerializedName("lastname")
+    val lastName: String
+)
+
+/**
+ * Digital Visa Wallet user request
+ */
+data class DigitalVisaWalletUserRequest(
+    @SerializedName("useremail")
+    val userEmail: String
+)
+
+/**
+ * Digital Visa Wallet card request
+ */
+data class DigitalVisaWalletCardRequest(
+    @SerializedName("useremail")
+    val userEmail: String,
+    @SerializedName("cardid")
+    val cardId: String
+)
+
+/**
+ * Digital Visa Wallet fund card request
+ */
+data class DigitalVisaWalletFundRequest(
+    @SerializedName("useremail")
+    val userEmail: String,
+    @SerializedName("cardid")
+    val cardId: String,
+    val amount: String
+)
+
+/**
  * API Response wrapper
  */
 data class ApiResponse<T>(
@@ -76,6 +117,21 @@ data class CardResponse(
 )
 
 /**
+ * Digital Visa Wallet card response from creation
+ */
+data class DigitalVisaWalletCardResponse(
+    val id: String? = null,
+    val cardName: String? = null,
+    val last4Digits: String? = null,
+    val currencyCode: String? = null,
+    val balance: String? = null,
+    val paymentSystem: String? = null,
+    val status: String? = null,
+    val expiresAt: String? = null,
+    val createdAt: String? = null
+)
+
+/**
  * Card details
  */
 data class CardDetails(
@@ -88,6 +144,66 @@ data class CardDetails(
     val availableBalance: String,
     val createdAt: String,
     val updatedAt: String
+)
+
+/**
+ * Digital Visa Wallet card summary
+ */
+data class DigitalVisaWalletCardSummary(
+    @SerializedName("cardid")
+    val cardId: String,
+    @SerializedName("nameoncard")
+    val nameOnCard: String,
+    @SerializedName("lastfour")
+    val lastFour: String,
+    val brand: String,
+    val type: String
+)
+
+/**
+ * Digital Visa Wallet card details
+ */
+data class DigitalVisaWalletCardDetails(
+    @SerializedName("cardid")
+    val cardId: String,
+    @SerializedName("nameoncard")
+    val nameOnCard: String,
+    @SerializedName("card_number")
+    val cardNumber: String,
+    val type: String,
+    val brand: String,
+    val status: String,
+    @SerializedName("expiry_year")
+    val expiryYear: String,
+    @SerializedName("expiry_month")
+    val expiryMonth: String,
+    val cvv: String,
+    @SerializedName("useremail")
+    val userEmail: String,
+    val balance: String,
+    @SerializedName("isaddon")
+    val isAddon: Int,
+    val transactions: DigitalVisaWalletTransactions? = null
+)
+
+data class DigitalVisaWalletTransactions(
+    @SerializedName("data")
+    val items: List<Transaction>?,
+    val total: Int,
+    val page: Int,
+    @SerializedName("per_page")
+    val perPage: Int,
+    val totalPages: Int
+)
+
+/**
+ * Digital Visa Wallet OTP response payload
+ */
+data class DigitalVisaWalletOtpResponse(
+    val otp: String? = null,
+    @SerializedName("cardid")
+    val cardId: String? = null,
+    val expiresAt: String? = null
 )
 
 /**

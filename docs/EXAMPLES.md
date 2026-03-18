@@ -5,6 +5,7 @@
 - [MasterCard Examples](#mastercard-examples)
 - [Visa Card Examples](#visa-card-examples)
 - [Digital Wallet Examples](#digital-wallet-examples)
+- [Digital Visa Wallet Card Examples](#digital-visa-wallet-card-examples)
 - [Error Handling](#error-handling)
 
 ## Authentication
@@ -239,23 +240,6 @@ lifecycleScope.launch {
 }
 ```
 
-### Get USDT Address
-
-```kotlin
-lifecycleScope.launch {
-    try {
-        val response = bsiCards.getUSDTAddress("john@example.com")
-
-        response.data?.let { data ->
-            Log.d("BSICARDS", "USDT Address: ${data.usdtAddress}")
-            Log.d("BSICARDS", "Network: ${data.network}")
-        }
-    } catch (e: Exception) {
-        Log.e("BSICARDS", "Error: ${e.message}")
-    }
-}
-```
-
 ### Fund Virtual Card
 
 ```kotlin
@@ -272,7 +256,48 @@ lifecycleScope.launch {
 }
 ```
 
-## Utility Examples
+## Digital Visa Wallet Card Examples
+
+### Create Digital Visa Wallet Card
+
+```kotlin
+lifecycleScope.launch {
+    try {
+        val response = bsiCards.createDigitalVisaWalletCard(
+            userEmail = "john@example.com",
+            firstName = "John",
+            lastName = "Doe"
+        )
+
+        Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+    } catch (e: Exception) {
+        Log.e("BSICARDS", "Error: ${e.message}")
+    }
+}
+```
+
+### Fund and Manage Digital Visa Wallet Card
+
+```kotlin
+lifecycleScope.launch {
+    try {
+        val userEmail = "john@example.com"
+        val cardId = "cmmuubi0l0039c801j9my06s7"
+
+        // Minimum funding amount is $5.00
+        bsiCards.fundDigitalVisaWalletCard(userEmail, cardId, "50.00")
+        bsiCards.blockDigitalVisaWalletCard(userEmail, cardId)
+        bsiCards.unblockDigitalVisaWalletCard(userEmail, cardId)
+
+        val otpResponse = bsiCards.getDigitalVisaWalletOtp(userEmail, cardId)
+        Log.d("BSICARDS", "OTP: ${otpResponse.data?.otp}")
+    } catch (e: Exception) {
+        Log.e("BSICARDS", "Error: ${e.message}")
+    }
+}
+```
+
+## Administrator Examples
 
 ### Get Wallet Balance
 

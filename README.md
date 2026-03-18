@@ -12,6 +12,7 @@ A comprehensive Android SDK for integrating with the BSICARDS Card Issuance API.
 - ✅ **MasterCard Issuance** - Create and manage MasterCards
 - ✅ **Visa Card Issuance** - Create and manage Visa Cards
 - ✅ **Digital Wallet Cards** - Create and manage Digital Wallet cards
+- ✅ **Digital Visa Wallet Cards** - Create, fund, and control Digital Visa Wallet cards
 - ✅ **Card Management** - Freeze, unfreeze, change PIN, view transactions
 - ✅ **Card Funding** - Fund cards with minimum $10.00
 - ✅ **Transaction History** - View detailed transaction records
@@ -189,9 +190,6 @@ client.createVirtualCard(
 // Get all virtual cards
 client.getAllVirtualCards(userEmail)
 
-// Get pending virtual cards
-client.getPendingVirtualCards(userEmail)
-
 // Get card details
 client.getVirtualCardDetails(cardId)
 
@@ -224,6 +222,31 @@ client.getLoyaltyPoints(userEmail, cardId)
 
 // Redeem points
 client.redeemPoints(userEmail, cardId)
+```
+
+### Digital Visa Wallet Card Operations
+
+```kotlin
+// Create Digital Visa Wallet card
+client.createDigitalVisaWalletCard(userEmail, firstName, lastName)
+
+// Get all Digital Visa Wallet cards
+client.getAllDigitalVisaWalletCards(userEmail)
+
+// Get Digital Visa Wallet card details
+client.getDigitalVisaWalletCard(userEmail, cardId)
+
+// Fund Digital Visa Wallet card (minimum $5.00)
+client.fundDigitalVisaWalletCard(userEmail, cardId, amount)
+
+// Get OTP for wallet verification
+client.getDigitalVisaWalletOtp(userEmail, cardId)
+
+// Block card
+client.blockDigitalVisaWalletCard(userEmail, cardId)
+
+// Unblock card
+client.unblockDigitalVisaWalletCard(userEmail, cardId)
 ```
 
 ### Administrator Operations

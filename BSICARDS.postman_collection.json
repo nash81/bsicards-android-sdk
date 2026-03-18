@@ -1322,45 +1322,6 @@
           "response": []
         },
         {
-          "name": "USDT Deposit Address",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "publickey",
-                "value": "{{publickey}}",
-                "type": "text"
-              },
-              {
-                "key": "secretkey",
-                "value": "{{secretkey}}",
-                "type": "text"
-              },
-              {
-                "key": "x-bitnob-signature",
-                "value": "1b126b2915997f2e177e631123aaf6894df4da2cf0df5233388add51b75eb3f46cd9785e4235829f27f70d28b9f50f96685610bd105cf513bb70702dc8c3d754",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"event\":\"stablecoin.usdt.received.success\",\"data\":{\"id\":\"43bea4ce-4025-44ad-8e80-ffd1a764ea96\",\"fees\":\"0\",\"hash\":\"66620853c3c5a5accd791f0b18ad2f14ceb1dab0c8f96f6efac7c85b49d57ead\",\"type\":\"credit\",\"chain\":\"tron\",\"action\":\"receive_usdt\",\"amount\":\"9\",\"address\":\"TSimyt3VEHahNN5gXLZmg5uRA1d7zpCApR\",\"channel\":\"onchain\",\"centFees\":\"0\",\"companyId\":\"b625c7cf-91b5-4e19-bb64-bed5e13b723c\",\"reference\":\"RCV_USDT_8485e28412c2\",\"centAmount\":\"900\",\"description\":\"received USDT payment\",\"confirmations\":19}}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{url}}bitnob",
-              "host": [
-                "{{url}}bitnob"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
           "name": "Fund Card",
           "request": {
             "method": "POST",
@@ -1398,7 +1359,7 @@
       ]
     },
     {
-      "name": "Digital Wallet Cards",
+      "name": "Digital Master Wallet Cards",
       "item": [
         {
           "name": "Create Virtual Card",
@@ -2787,6 +2748,550 @@
       "description": "#### **You can use the sample data and test credentials for running on sandbox. These Mastercards support 3DS in app authentication, over 6+ coins to USD, Gpay/Apple Pay ( Subject to your KYB Approval )**"
     },
     {
+      "name": "Digital Visa Wallet Cards",
+      "item": [
+        {
+          "name": "Create Virtual Card",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "publickey",
+                "value": "{{publickey}}",
+                "type": "text"
+              },
+              {
+                "key": "secretkey",
+                "value": "{{secretkey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"useremail\" : \"test11@bsigroup.com\",\r\n    \"firstname\" : \"John\",\r\n    \"lastname\": \"Doe\"\r\n  \r\n    \r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}digital-wallet-visa/create-card",
+              "host": [
+                "{{url}}digital-wallet-visa"
+              ],
+              "path": [
+                "create-card"
+              ]
+            },
+            "description": "The Card issuance fee and minimum funding of $5 will be deducted from Digital visa issuing and Digital fund balance respectively"
+          },
+          "response": [
+            {
+              "name": "Create Virtual Card",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "publickey",
+                    "value": "{{publickey}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "secretkey",
+                    "value": "{{secretkey}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"useremail\" : \"test11@bsigroup.com\",\r\n    \"firstname\" : \"John\",\r\n    \"lastname\": \"Doe\"\r\n  \r\n    \r\n\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}digital-wallet-visa/create-card",
+                  "host": [
+                    "{{url}}digital-wallet-visa"
+                  ],
+                  "path": [
+                    "create-card"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Mar 2026 16:49:32 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Apache"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5, max=100"
+                },
+                {
+                  "key": "Connection",
+                  "value": "Keep-Alive"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 201,\n    \"status\": \"success\",\n    \"message\": \"Digital Wallet Visa card created successfully\",\n    \"data\": {\n        \"id\": \"cmmuuky2s003bc801b5888lzl\",\n        \"cardName\": \"John Doe\",\n        \"last4Digits\": \"8091\",\n        \"currencyCode\": \"USD\",\n        \"balance\": \"0.00\",\n        \"paymentSystem\": \"VISA\",\n        \"status\": \"ACTIVE\",\n        \"expiresAt\": \"02/29\",\n        \"createdAt\": \"2026-03-17T16:49:32.548Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Digital Cards",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "publickey",
+                "value": "{{publickey}}",
+                "type": "text"
+              },
+              {
+                "key": "secretkey",
+                "value": "{{secretkey}}",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"useremail\" : \"test11@bsigroup.com\"\r\n    \r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}digital-wallet-visa/get-all-cards",
+              "host": [
+                "{{url}}digital-wallet-visa"
+              ],
+              "path": [
+                "get-all-cards"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get All Digital Cards",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "publickey",
+                    "value": "{{publickey}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "secretkey",
+                    "value": "{{secretkey}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"useremail\" : \"test11@bsigroup.com\"\r\n    \r\n\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}digital-wallet-visa/get-all-cards",
+                  "host": [
+                    "{{url}}digital-wallet-visa"
+                  ],
+                  "path": [
+                    "get-all-cards"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Mar 2026 16:58:12 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Apache"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5, max=100"
+                },
+                {
+                  "key": "Connection",
+                  "value": "Keep-Alive"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 200,\n    \"status\": \"success\",\n    \"message\": \"Cards fetched successfully\",\n    \"data\": [\n        {\n            \"cardid\": \"cmmuubi0l0039c801j9my06s7\",\n            \"nameoncard\": \"John Doe\",\n            \"lastfour\": \"9523\",\n            \"brand\": \"digitalvisa\",\n            \"type\": \"virtual\"\n        },\n        {\n            \"cardid\": \"cmmuuky2s003bc801b5888lzl\",\n            \"nameoncard\": \"John Doe\",\n            \"lastfour\": \"8091\",\n            \"brand\": \"digitalvisa\",\n            \"type\": \"virtual\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Digital Card",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "publickey",
+                "value": "{{publickey}}",
+                "type": "text"
+              },
+              {
+                "key": "secretkey",
+                "value": "{{secretkey}}",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"useremail\" : \"test11@bsigroup.com\",\r\n    \"cardid\" : \"cmmuubi0l0039c801j9my06s7\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}digital-wallet-visa/get-card",
+              "host": [
+                "{{url}}digital-wallet-visa"
+              ],
+              "path": [
+                "get-card"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Digital Card",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "publickey",
+                    "value": "{{publickey}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "secretkey",
+                    "value": "{{secretkey}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"useremail\" : \"test11@bsigroup.com\",\r\n    \"cardid\" : \"cmmuubi0l0039c801j9my06s7\"\r\n\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}digital-wallet-visa/get-card",
+                  "host": [
+                    "{{url}}digital-wallet-visa"
+                  ],
+                  "path": [
+                    "get-card"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Date",
+                  "value": "Tue, 17 Mar 2026 17:13:08 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Apache"
+                },
+                {
+                  "key": "Cache-Control",
+                  "value": "no-cache, private"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5, max=100"
+                },
+                {
+                  "key": "Connection",
+                  "value": "Keep-Alive"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"code\": 200,\n    \"status\": \"success\",\n    \"message\": \"Card details fetched\",\n    \"data\": {\n        \"cardid\": \"cmmuubi0l0039c801j9my06s7\",\n        \"nameoncard\": \"John Doe\",\n        \"card_number\": \"4443635004479523\",\n        \"type\": \"virtual\",\n        \"brand\": \"digitalvisa\",\n        \"status\": \"ACTIVE\",\n        \"expiry_year\": \"29\",\n        \"expiry_month\": \"02\",\n        \"cvv\": \"433\",\n        \"useremail\": \"test11@bsigroup.com\",\n        \"balance\": \"0.00\",\n        \"isaddon\": 0,\n        \"transactions\": {\n            \"data\": [],\n            \"total\": 0,\n            \"page\": 1,\n            \"per_page\": 100,\n            \"totalPages\": 0\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Fund Card",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "publickey",
+                "value": "{{publickey}}",
+                "type": "text"
+              },
+              {
+                "key": "secretkey",
+                "value": "{{secretkey}}",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"useremail\" : \"test@bsigroup.tech\",\r\n    \"cardid\" : \"cmmuubi0l0039c801j9my06s7\",\r\n    \"amount\" : 50.00 // minimum $5.00\r\n    \r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}digital-wallet-visa/fund-card",
+              "host": [
+                "{{url}}digital-wallet-visa"
+              ],
+              "path": [
+                "fund-card"
+              ]
+            },
+            "description": "Minimium load amount is $5"
+          },
+          "response": []
+        },
+        {
+          "name": "Check DigitalWallet OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "publickey",
+                "value": "{{publickey}}",
+                "type": "text"
+              },
+              {
+                "key": "secretkey",
+                "value": "{{secretkey}}",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"useremail\" : \"test11@bsigroup.com\",\r\n    \"cardid\" : \"cmmuubi0l0039c801j9my06s7\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}digital-wallet-visa/get-otp",
+              "host": [
+                "{{url}}digital-wallet-visa"
+              ],
+              "path": [
+                "get-otp"
+              ]
+            },
+            "description": "When the user adds their card manually to Gpay/ApplePay for verification they need to select Email otp and this end points retrieves the OTP and you can then send an email within your application to the user or display on screen."
+          },
+          "response": []
+        },
+        {
+          "name": "Block Digital Card",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "publickey",
+                "value": "{{publickey}}",
+                "type": "text"
+              },
+              {
+                "key": "secretkey",
+                "value": "{{secretkey}}",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"useremail\" : \"test11@bsigroup.com\",\r\n    \"cardid\" : \"cmmuubi0l0039c801j9my06s7\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}digital-wallet-visa/block-card",
+              "host": [
+                "{{url}}digital-wallet-visa"
+              ],
+              "path": [
+                "block-card"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unblock Digital Card",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "publickey",
+                "value": "{{publickey}}",
+                "type": "text"
+              },
+              {
+                "key": "secretkey",
+                "value": "{{secretkey}}",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"useremail\" : \"test11@bsigroup.com\",\r\n    \"cardid\" : \"cmmuubi0l0039c801j9my06s7\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}digital-wallet-visa/unblock-card",
+              "host": [
+                "{{url}}digital-wallet-visa"
+              ],
+              "path": [
+                "unblock-card"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "#### **You can use the sample data and test credentials for running on sandbox. These Visacards support 3DS auto approve, Gpay/Apple Pay**"
+    },
+    {
       "name": "Reseller Digital Wallet Cards",
       "item": [
         {
@@ -3019,6 +3524,46 @@
               "raw": "{{resellerurl}}getdigitalcard",
               "host": [
                 "{{resellerurl}}getdigitalcard"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Addon",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "publickey",
+                "value": "pk_test_513921074",
+                "type": "text"
+              },
+              {
+                "key": "secretkey",
+                "value": "rsec_317417266",
+                "type": "text"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 10; SM-G996U Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"useremail\" : \"test11@bsigroup.com\",\r\n    \"cardid\" : \"crd-78692d69-a1e3-4871-b567-abe344af1ca6\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{resellerurl}}createaddon",
+              "host": [
+                "{{resellerurl}}createaddon"
               ]
             }
           },

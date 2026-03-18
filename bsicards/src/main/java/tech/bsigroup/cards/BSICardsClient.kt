@@ -7,6 +7,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 /**
@@ -343,6 +344,115 @@ class BSICardsClient(
             api.unfreezeVirtualCard(publicKey, secretKey, cardId)
         }
 
+    // ============ Digital Visa Wallet Card Operations ============
+
+    /**
+     * Create Digital Visa Wallet card
+     */
+    suspend fun createDigitalVisaWalletCard(
+        userEmail: String,
+        firstName: String,
+        lastName: String
+    ): ApiResponse<DigitalVisaWalletCardResponse> = withContext(Dispatchers.IO) {
+        validateInput(userEmail, firstName, lastName)
+        api.createDigitalVisaWalletCard(
+            publicKey,
+            secretKey,
+            DigitalVisaWalletCreateCardRequest(userEmail, firstName, lastName)
+        )
+    }
+
+    /**
+     * Get all Digital Visa Wallet cards
+     */
+    suspend fun getAllDigitalVisaWalletCards(
+        userEmail: String
+    ): ApiResponse<List<DigitalVisaWalletCardSummary>> = withContext(Dispatchers.IO) {
+        validateInput(userEmail)
+        api.getAllDigitalVisaWalletCards(
+            publicKey,
+            secretKey,
+            DigitalVisaWalletUserRequest(userEmail)
+        )
+    }
+
+    /**
+     * Get Digital Visa Wallet card details
+     */
+    suspend fun getDigitalVisaWalletCard(
+        userEmail: String,
+        cardId: String
+    ): ApiResponse<DigitalVisaWalletCardDetails> = withContext(Dispatchers.IO) {
+        validateInput(userEmail, cardId)
+        api.getDigitalVisaWalletCard(
+            publicKey,
+            secretKey,
+            DigitalVisaWalletCardRequest(userEmail, cardId)
+        )
+    }
+
+    /**
+     * Fund Digital Visa Wallet card
+     */
+    suspend fun fundDigitalVisaWalletCard(
+        userEmail: String,
+        cardId: String,
+        amount: String
+    ): ApiResponse<MessageResponse> = withContext(Dispatchers.IO) {
+        validateInput(userEmail, cardId, amount)
+        validateAmount(amount, minimum = 5.0)
+        api.fundDigitalVisaWalletCard(
+            publicKey,
+            secretKey,
+            DigitalVisaWalletFundRequest(userEmail, cardId, amount)
+        )
+    }
+
+    /**
+     * Get OTP for Digital Visa Wallet card verification
+     */
+    suspend fun getDigitalVisaWalletOtp(
+        userEmail: String,
+        cardId: String
+    ): ApiResponse<DigitalVisaWalletOtpResponse> = withContext(Dispatchers.IO) {
+        validateInput(userEmail, cardId)
+        api.getDigitalVisaWalletOtp(
+            publicKey,
+            secretKey,
+            DigitalVisaWalletCardRequest(userEmail, cardId)
+        )
+    }
+
+    /**
+     * Block Digital Visa Wallet card
+     */
+    suspend fun blockDigitalVisaWalletCard(
+        userEmail: String,
+        cardId: String
+    ): ApiResponse<MessageResponse> = withContext(Dispatchers.IO) {
+        validateInput(userEmail, cardId)
+        api.blockDigitalVisaWalletCard(
+            publicKey,
+            secretKey,
+            DigitalVisaWalletCardRequest(userEmail, cardId)
+        )
+    }
+
+    /**
+     * Unblock Digital Visa Wallet card
+     */
+    suspend fun unblockDigitalVisaWalletCard(
+        userEmail: String,
+        cardId: String
+    ): ApiResponse<MessageResponse> = withContext(Dispatchers.IO) {
+        validateInput(userEmail, cardId)
+        api.unblockDigitalVisaWalletCard(
+            publicKey,
+            secretKey,
+            DigitalVisaWalletCardRequest(userEmail, cardId)
+        )
+    }
+
     // ============ Administrator Operations ============
 
     /**
@@ -471,11 +581,11 @@ class BSICardsClient(
     /**
      * Validate amount format
      */
-    private fun validateAmount(amount: String) {
+    private fun validateAmount(amount: String, minimum: Double = 10.0) {
         try {
             val value = amount.toDouble()
-            if (value < 10.0) {
-                throw ValidationException("Minimum amount is $10.00")
+            if (value < minimum) {
+                throw ValidationException("Minimum amount is $" + String.format(Locale.US, "%.2f", minimum))
             }
         } catch (e: NumberFormatException) {
             throw ValidationException("Invalid amount format")

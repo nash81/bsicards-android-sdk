@@ -9,6 +9,7 @@ The BSICARDS Android SDK provides a complete Kotlin interface for the BSICARDS C
 - [MasterCard Operations](#mastercard-operations)
 - [Visa Card Operations](#visa-card-operations)
 - [Digital Wallet Operations](#digital-wallet-operations)
+- [Digital Visa Wallet Card Operations](#digital-visa-wallet-card-operations)
 - [Administrator Operations](#administrator-operations)
 - [Data Models](#data-models)
 - [Exceptions](#exceptions)
@@ -325,17 +326,6 @@ suspend fun getVirtualCardTransactions(
 ): ApiResponse<TransactionResponse>
 ```
 
-### getUSDTAddress
-
-Gets USDT deposit address for a user.
-
-**Signature:**
-```kotlin
-suspend fun getUSDTAddress(
-    userEmail: String
-): ApiResponse<USDTAddressResponse>
-```
-
 ### fundVirtualCard
 
 Funds a virtual card.
@@ -366,6 +356,95 @@ Unfreezes a virtual card.
 **Signature:**
 ```kotlin
 suspend fun unfreezeVirtualCard(
+    cardId: String
+): ApiResponse<MessageResponse>
+```
+
+---
+
+## Digital Visa Wallet Card Operations
+
+### createDigitalVisaWalletCard
+
+Creates a Digital Visa Wallet card.
+
+**Signature:**
+```kotlin
+suspend fun createDigitalVisaWalletCard(
+    userEmail: String,
+    firstName: String,
+    lastName: String
+): ApiResponse<DigitalVisaWalletCardResponse>
+```
+
+### getAllDigitalVisaWalletCards
+
+Retrieves all Digital Visa Wallet cards for a user.
+
+**Signature:**
+```kotlin
+suspend fun getAllDigitalVisaWalletCards(
+    userEmail: String
+): ApiResponse<List<DigitalVisaWalletCardSummary>>
+```
+
+### getDigitalVisaWalletCard
+
+Gets a specific Digital Visa Wallet card.
+
+**Signature:**
+```kotlin
+suspend fun getDigitalVisaWalletCard(
+    userEmail: String,
+    cardId: String
+): ApiResponse<DigitalVisaWalletCardDetails>
+```
+
+### fundDigitalVisaWalletCard
+
+Funds a Digital Visa Wallet card.
+
+**Signature:**
+```kotlin
+suspend fun fundDigitalVisaWalletCard(
+    userEmail: String,
+    cardId: String,
+    amount: String
+): ApiResponse<MessageResponse>
+```
+
+### getDigitalVisaWalletOtp
+
+Retrieves OTP for wallet verification when adding card to Apple Pay/Google Pay.
+
+**Signature:**
+```kotlin
+suspend fun getDigitalVisaWalletOtp(
+    userEmail: String,
+    cardId: String
+): ApiResponse<DigitalVisaWalletOtpResponse>
+```
+
+### blockDigitalVisaWalletCard
+
+Blocks a Digital Visa Wallet card.
+
+**Signature:**
+```kotlin
+suspend fun blockDigitalVisaWalletCard(
+    userEmail: String,
+    cardId: String
+): ApiResponse<MessageResponse>
+```
+
+### unblockDigitalVisaWalletCard
+
+Unblocks a Digital Visa Wallet card.
+
+**Signature:**
+```kotlin
+suspend fun unblockDigitalVisaWalletCard(
+    userEmail: String,
     cardId: String
 ): ApiResponse<MessageResponse>
 ```

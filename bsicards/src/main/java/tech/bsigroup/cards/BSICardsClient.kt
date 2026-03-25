@@ -565,6 +565,93 @@ class BSICardsClient(
             api.redeemPoints(publicKey, secretKey, DigitalCardRequest(userEmail, cardId))
         }
 
+    // ============ Wallet As A Service ============
+
+    /**
+     * Get supported swap currencies
+     */
+    suspend fun getSwapCurrencies(): ApiResponse<List<SwapCurrency>> = withContext(Dispatchers.IO) {
+        api.getSwapCurrencies(publicKey, secretKey)
+    }
+
+    /**
+     * Get swap status by transaction id
+     */
+    suspend fun getSwapStatus(transactionId: String): ApiResponse<SwapStatus> = withContext(Dispatchers.IO) {
+        validateInput(transactionId)
+        api.getSwapStatus(publicKey, secretKey, transactionId)
+    }
+
+    /**
+     * Get swap estimate
+     */
+    suspend fun getSwapEstimate(request: SwapEstimateRequest): ApiResponse<SwapEstimate> = withContext(Dispatchers.IO) {
+        api.getSwapEstimate(publicKey, secretKey, request)
+    }
+
+    /**
+     * Create swap transaction
+     */
+    suspend fun createSwap(request: SwapCreateRequest): ApiResponse<SwapCreateResponse> = withContext(Dispatchers.IO) {
+        api.createSwap(publicKey, secretKey, request)
+    }
+
+    /**
+     * Create a new wallet address
+     */
+    suspend fun createWalletAddress(userEmail: String, coin: String): ApiResponse<WalletAddressResponse> = withContext(Dispatchers.IO) {
+        validateInput(userEmail, coin)
+        api.createWalletAddress(publicKey, secretKey, WalletCreateAddressRequest(userEmail, coin))
+    }
+
+    /**
+     * Get all wallet addresses for a user
+     */
+    suspend fun getAllWalletAddresses(userEmail: String): ApiResponse<List<WalletAddressResponse>> = withContext(Dispatchers.IO) {
+        validateInput(userEmail)
+        api.getAllWalletAddresses(publicKey, secretKey, userEmail)
+    }
+
+    /**
+     * Get a specific wallet address by uuid
+     */
+    suspend fun getWalletAddress(uuid: String, userEmail: String): ApiResponse<WalletAddressResponse> = withContext(Dispatchers.IO) {
+        validateInput(uuid, userEmail)
+        api.getWalletAddress(publicKey, secretKey, uuid, userEmail)
+    }
+
+    /**
+     * Get wallet balance by uuid
+     */
+    suspend fun getWalletBalanceByUuid(uuid: String, userEmail: String): ApiResponse<WalletBalanceResponse> = withContext(Dispatchers.IO) {
+        validateInput(uuid, userEmail)
+        api.getWalletBalanceByUuid(publicKey, secretKey, uuid, userEmail)
+    }
+
+    /**
+     * Get withdrawal fee
+     */
+    suspend fun getWalletWithdrawalFee(uuid: String, toAddress: String, amount: String, coin: String, userEmail: String): ApiResponse<WalletWithdrawalFeeResponse> = withContext(Dispatchers.IO) {
+        validateInput(uuid, toAddress, amount, coin, userEmail)
+        api.getWalletWithdrawalFee(publicKey, secretKey, WalletWithdrawRequest(uuid, toAddress, amount, coin, userEmail))
+    }
+
+    /**
+     * Withdraw from wallet
+     */
+    suspend fun withdrawFromWallet(uuid: String, toAddress: String, amount: String, coin: String, userEmail: String, memo: String? = null): ApiResponse<WalletWithdrawResponse> = withContext(Dispatchers.IO) {
+        validateInput(uuid, toAddress, amount, coin, userEmail)
+        api.withdrawFromWallet(publicKey, secretKey, WalletWithdrawRequest(uuid, toAddress, amount, coin, userEmail, memo))
+    }
+
+    /**
+     * Get withdrawal status
+     */
+    suspend fun getWalletWithdrawalStatus(txHash: String, coin: String): ApiResponse<WalletWithdrawalStatusResponse> = withContext(Dispatchers.IO) {
+        validateInput(txHash, coin)
+        api.getWalletWithdrawalStatus(publicKey, secretKey, WalletWithdrawalStatusRequest(txHash, coin))
+    }
+
     // ============ Validation Methods ============
 
     /**

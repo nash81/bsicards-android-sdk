@@ -20,6 +20,7 @@ A comprehensive Android SDK for integrating with the BSICARDS Card Issuance API.
 - ✅ **Type Safe** - Full Kotlin type safety with data classes
 - ✅ **Error Handling** - Custom exceptions for API errors
 - ✅ **Retrofit 2** - Modern REST API integration
+- **Wallet As A Service** - Swap currencies, create wallet addresses, withdraw, and more
 
 ## Requirements
 
@@ -269,6 +270,25 @@ client.getAllVisaCardsByAdmin(userEmail)
 
 // Get all Digital Cards (admin view)
 client.getAllDigitalCardsByAdmin(userEmail)
+```
+
+### Wallet As A Service
+
+```kotlin
+// Swap
+client.getSwapCurrencies()
+client.getSwapStatus(transactionId)
+client.getSwapEstimate(SwapEstimateRequest(...))
+client.createSwap(SwapCreateRequest(...))
+
+// Wallet
+client.createWalletAddress(userEmail, coin)
+client.getAllWalletAddresses(userEmail)
+client.getWalletAddress(uuid, userEmail)
+client.getWalletBalanceByUuid(uuid, userEmail)
+client.getWalletWithdrawalFee(uuid, toAddress, amount, coin, userEmail)
+client.withdrawFromWallet(uuid, toAddress, amount, coin, userEmail, memo)
+client.getWalletWithdrawalStatus(txHash, coin)
 ```
 
 ## Error Handling

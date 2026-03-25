@@ -13,6 +13,7 @@ The BSICARDS Android SDK provides a complete Kotlin interface for the BSICARDS C
 - [Administrator Operations](#administrator-operations)
 - [Data Models](#data-models)
 - [Exceptions](#exceptions)
+- [Wallet As A Service](#wallet-as-a-service)
 
 ---
 
@@ -676,3 +677,111 @@ For questions or issues, contact:
 - Email: cs@bsigroup.tech
 - GitHub: https://github.com/nash81/bsicards-android-sdk
 
+---
+
+## Wallet As A Service
+
+### Swap
+
+#### getSwapCurrencies
+
+Retrieves supported swap currencies.
+
+**Signature:**
+```kotlin
+suspend fun getSwapCurrencies(): ApiResponse<List<SwapCurrency>>
+```
+
+#### getSwapStatus
+
+Retrieves swap status by transaction ID.
+
+**Signature:**
+```kotlin
+suspend fun getSwapStatus(transactionId: String): ApiResponse<SwapStatus>
+```
+
+#### getSwapEstimate
+
+Gets swap estimate for a currency pair and amount.
+
+**Signature:**
+```kotlin
+suspend fun getSwapEstimate(request: SwapEstimateRequest): ApiResponse<SwapEstimate>
+```
+
+#### createSwap
+
+Creates a swap transaction.
+
+**Signature:**
+```kotlin
+suspend fun createSwap(request: SwapCreateRequest): ApiResponse<SwapCreateResponse>
+```
+
+### Wallet
+
+#### createWalletAddress
+
+Creates a new wallet address for a user and coin.
+
+**Signature:**
+```kotlin
+suspend fun createWalletAddress(userEmail: String, coin: String): ApiResponse<WalletAddressResponse>
+```
+
+#### getAllWalletAddresses
+
+Retrieves all wallet addresses for a user.
+
+**Signature:**
+```kotlin
+suspend fun getAllWalletAddresses(userEmail: String): ApiResponse<List<WalletAddressResponse>>
+```
+
+#### getWalletAddress
+
+Retrieves a specific wallet address by UUID and user email.
+
+**Signature:**
+```kotlin
+suspend fun getWalletAddress(uuid: String, userEmail: String): ApiResponse<WalletAddressResponse>
+```
+
+#### getWalletBalanceByUuid
+
+Retrieves wallet balance by UUID and user email.
+
+**Signature:**
+```kotlin
+suspend fun getWalletBalanceByUuid(uuid: String, userEmail: String): ApiResponse<WalletBalanceResponse>
+```
+
+#### getWalletWithdrawalFee
+
+Gets withdrawal fee for a withdrawal request.
+
+**Signature:**
+```kotlin
+suspend fun getWalletWithdrawalFee(uuid: String, toAddress: String, amount: String, coin: String, userEmail: String): ApiResponse<WalletWithdrawalFeeResponse>
+```
+
+#### withdrawFromWallet
+
+Withdraws funds from a wallet.
+
+**Signature:**
+```kotlin
+suspend fun withdrawFromWallet(uuid: String, toAddress: String, amount: String, coin: String, userEmail: String, memo: String? = null): ApiResponse<WalletWithdrawResponse>
+```
+
+#### getWalletWithdrawalStatus
+
+Gets withdrawal status by transaction hash and coin.
+
+**Signature:**
+```kotlin
+suspend fun getWalletWithdrawalStatus(txHash: String, coin: String): ApiResponse<WalletWithdrawalStatusResponse>
+```
+
+---

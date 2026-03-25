@@ -444,5 +444,97 @@ interface BSICardsAPI {
         @Header("secretkey") secretKey: String,
         @Body request: DigitalCardRequest
     ): ApiResponse<MessageResponse>
-}
 
+    // ============ Wallet As A Service ============
+
+    // --- Swap ---
+    /** Get supported swap currencies */
+    @GET("exchange/currencies")
+    suspend fun getSwapCurrencies(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String
+    ): ApiResponse<List<SwapCurrency>>
+
+    /** Get swap status by transaction id */
+    @GET("exchange/status")
+    suspend fun getSwapStatus(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Query("transaction_id") transactionId: String
+    ): ApiResponse<SwapStatus>
+
+    /** Get swap estimate */
+    @POST("exchange/estimate")
+    suspend fun getSwapEstimate(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: SwapEstimateRequest
+    ): ApiResponse<SwapEstimate>
+
+    /** Create swap transaction */
+    @POST("exchange/create")
+    suspend fun createSwap(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: SwapCreateRequest
+    ): ApiResponse<SwapCreateResponse>
+
+    // --- Wallet ---
+    /** Create a new wallet address */
+    @POST("wallet/create-address")
+    suspend fun createWalletAddress(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: WalletCreateAddressRequest
+    ): ApiResponse<WalletAddressResponse>
+
+    /** Get all wallet addresses for a user */
+    @GET("wallet/addresses")
+    suspend fun getAllWalletAddresses(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Query("useremail") userEmail: String
+    ): ApiResponse<List<WalletAddressResponse>>
+
+    /** Get a specific wallet address by uuid */
+    @GET("wallet/address/{uuid}")
+    suspend fun getWalletAddress(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Path("uuid") uuid: String,
+        @Query("useremail") userEmail: String
+    ): ApiResponse<WalletAddressResponse>
+
+    /** Get wallet balance by uuid */
+    @GET("wallet/balance")
+    suspend fun getWalletBalanceByUuid(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Query("uuid") uuid: String,
+        @Query("useremail") userEmail: String
+    ): ApiResponse<WalletBalanceResponse>
+
+    /** Get withdrawal fee */
+    @POST("wallet/withdrawal-fee")
+    suspend fun getWalletWithdrawalFee(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: WalletWithdrawRequest
+    ): ApiResponse<WalletWithdrawalFeeResponse>
+
+    /** Withdraw from wallet */
+    @POST("wallet/withdraw")
+    suspend fun withdrawFromWallet(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: WalletWithdrawRequest
+    ): ApiResponse<WalletWithdrawResponse>
+
+    /** Get withdrawal status */
+    @POST("wallet/withdrawal-status")
+    suspend fun getWalletWithdrawalStatus(
+        @Header("publickey") publicKey: String,
+        @Header("secretkey") secretKey: String,
+        @Body request: WalletWithdrawalStatusRequest
+    ): ApiResponse<WalletWithdrawalStatusResponse>
+}

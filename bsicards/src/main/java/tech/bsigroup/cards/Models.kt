@@ -336,3 +336,100 @@ data class USDTAddressResponse(
     val qrCode: String? = null
 )
 
+// ============ Wallet As A Service Models ============
+
+data class SwapCurrency(
+    val symbol: String,
+    val name: String,
+    val network: String
+)
+
+data class SwapStatus(
+    val transactionId: String,
+    val status: String,
+    val from: String,
+    val to: String,
+    val amount: String,
+    val createdAt: String,
+    val updatedAt: String?
+)
+
+data class SwapEstimateRequest(
+    val from: String,
+    val to: String,
+    val network_from: String,
+    val network_to: String,
+    val amount: Double
+)
+
+data class SwapEstimate(
+    val estimatedAmount: String,
+    val rate: String,
+    val fee: String
+)
+
+data class SwapCreateRequest(
+    val coin_from: String,
+    val coin_to: String,
+    val network_from: String,
+    val network_to: String,
+    val deposit_amount: Double,
+    val withdrawal: String,
+    val withdrawal_extra_id: String? = null
+)
+
+data class SwapCreateResponse(
+    val transactionId: String,
+    val depositAddress: String,
+    val amount: String,
+    val status: String
+)
+
+data class WalletCreateAddressRequest(
+    val useremail: String,
+    val coin: String
+)
+
+data class WalletAddressResponse(
+    val uuid: String,
+    val address: String,
+    val coin: String,
+    val useremail: String,
+    val mnemonic: String? = null,
+    val private_key: String? = null,
+    val created_at: String? = null
+)
+
+data class WalletBalanceResponse(
+    val balances: Map<String, String>
+)
+
+data class WalletWithdrawRequest(
+    val uuid: String,
+    val to_address: String,
+    val amount: String,
+    val coin: String,
+    val useremail: String,
+    val memo: String? = null
+)
+
+data class WalletWithdrawalFeeResponse(
+    val fee: String,
+    val coin: String
+)
+
+data class WalletWithdrawResponse(
+    val tx_hash: String,
+    val status: String
+)
+
+data class WalletWithdrawalStatusRequest(
+    val tx_hash: String,
+    val coin: String
+)
+
+data class WalletWithdrawalStatusResponse(
+    val status: String,
+    val confirmations: Int? = null,
+    val tx_hash: String? = null
+)
